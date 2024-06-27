@@ -12,6 +12,9 @@ import axios from 'axios';
 
 const Home = ({navigation}) => {
 
+    { /* READING AUTH TOKEN FROM .ENV */}
+    const AUTH_TOKEN = process.env.AUTH_TOKEN
+
     {/* Array of categories with corresponding endpoints */}
 
     const categories = [
@@ -53,7 +56,7 @@ const Home = ({navigation}) => {
         const options = {
             headers: {
                 accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTA3ZmU3NTE5OTQ3ZDQ3NGQ2YzJhNzZlODEzY2VkMyIsIm5iZiI6MTcxOTMyMzY3NS4zNjU1OTcsInN1YiI6IjY2N2FjYjAwNGFmOTM1YTgwY2Y2OWM4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iebtF801JMw3o8tw4MUXbdF4Kv3b0Ux4oBwq0LL8iYA'
+                Authorization: AUTH_TOKEN
               },
             params:{
                 page: '1',
