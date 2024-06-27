@@ -11,13 +11,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
-        {/* Setting header shown to true to allow navigation back to home */}
-        <Stack.Screen name='Onboarding' component={Onboarding} options={{
-          headerShown: true,
-          headerStyle: {
-            backgroundColor: COLORS.darkBgColor
-          },
-        }}>
+        <Stack.Screen name='Onboarding' component={Onboarding} options={{headerShown: false}}>
         </Stack.Screen>
 
         <Stack.Screen name='Home' component={Home} options={{headerShown:false}}>
