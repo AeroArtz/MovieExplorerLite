@@ -4,8 +4,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import MovieCard from '../components/MovieCard';
 import { COLORS } from '../constants/Colors';
 import axios from 'axios';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+
 
 const SearchScreen = ({route,navigation}) => {
+
+    { /* READING AUTH TOKEN FROM .ENV */}
+    const AUTH_TOKEN = process.env.AUTH_TOKEN
 
     {/*  Accessing search parameter by user */}
     const {q} = route.params;
@@ -25,15 +31,15 @@ const SearchScreen = ({route,navigation}) => {
 
     
 
-    {/* Function definiton for makign API call via axios */}
+    {/* Function definiton for making API call via axios */}
     
 
     const fetchData = async() => {
         const options = {
             headers: {
                 accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMTA3ZmU3NTE5OTQ3ZDQ3NGQ2YzJhNzZlODEzY2VkMyIsIm5iZiI6MTcxOTMyMzY3NS4zNjU1OTcsInN1YiI6IjY2N2FjYjAwNGFmOTM1YTgwY2Y2OWM4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iebtF801JMw3o8tw4MUXbdF4Kv3b0Ux4oBwq0LL8iYA'
-              },
+                Authorization: AUTH_TOKEN
+            },
             params:{
                 language: 'en-US',
                 page: '1',
@@ -53,6 +59,22 @@ const SearchScreen = ({route,navigation}) => {
     }
   return (
     <SafeAreaView style={styles.container}>
+
+        {/* Header Container */}
+        <View style={styles.headerContainer}>
+
+            {/* Back button which directs user back to home page */}
+            <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => navigation.navigate('Home')}
+            >
+                <Ionicons name="arrow-back" size={40} color={COLORS.WhiteMuted} />
+            </TouchableOpacity>
+
+            <Text style={styles.headerText}>
+                Go Back
+            </Text>
+        </View>
 
             {/* List structure to store results returned by API call for searching topic */}
         <FlatList
@@ -78,13 +100,26 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: COLORS.darkBgColor
     },
-    flatlist: {
-        
+    flatlist: { 
         margin: 5
         
     }   
     ,row: {
         flex: 1,
         justifyContent: "space-around"
+    },
+    headerContainer: {
+        flexDirection:'row',
+        marginBottom: 30
+    },
+    backButton : {
+        marginTop: 5,
+        marginLeft: 5
+    },
+    headerText: {
+        fontSize: '17px',
+        color: COLORS.WhiteMuted,
+        marginLeft: 5,
+        marginTop: 15,
     }
 })
